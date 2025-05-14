@@ -67,9 +67,9 @@ const Movie = () => {
       ) : (
         <>
 
-          <section className="p-6 bg-white text-black">
-            <h2 className="text-2xl font-bold mb-4">All Movies</h2>
-            <div className="grid grid-cols-5 gap-4">
+          <section className="p-4 sm:p-6 bg-white text-black">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4">All Movies</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
               {movies.map((movie) => (
                 <div
                   key={movie.id}
@@ -79,7 +79,7 @@ const Movie = () => {
                   <img
                     src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                     alt={movie.title || movie.name}
-                    className="w-full h-72 object-cover rounded"
+                    className="w-full h-60 sm:h-72 object-cover rounded"
                   />
                   <h3 className="mt-2 text-sm font-semibold text-center">
                     {movie.title || movie.name}
@@ -95,30 +95,40 @@ const Movie = () => {
             title={selectedMovie?.title || selectedMovie?.name}
             size="lg"
             centered
+            styles={{
+              content: { backgroundColor: "black" },
+              header: { backgroundColor: "black" },
+              title: {
+                color: "#facc15", 
+                fontWeight: "bold",
+                fontSize: "20px",
+              },
+            }}
           >
             {selectedMovie && (
-              <div className="flex-col gap-4">
+              <div className="flex-col md:flex-row gap-4">
                 <Image
                   src={`https://image.tmdb.org/t/p/w500${selectedMovie.poster_path}`}
                   alt={selectedMovie.title || selectedMovie.name}
                   width={200}
                   radius="md"
+                  className="self-center md:self-start"
                 />
                 <div>
-                  <h2 className="text-xl font-bold mb-2">
+                  <h2 className="text-lg md:text-xl font-bold mb-2 text-white">
                     {selectedMovie.title || selectedMovie.name}
                   </h2>
-                  <p className="text-sm text-gray-700 mb-3">
+                  <p className="text-sm md:text-base text-gray-300 mb-3">
                     {selectedMovie.overview}
                   </p>
-                  <p className="text-sm text-gray-500">
-                    Release Date:{" "}
-                    {selectedMovie.release_date || selectedMovie.first_air_date}
+                  <p className="text-sm text-gray-400">
+                    Release Date: {selectedMovie.release_date || selectedMovie.first_air_date}
                   </p>
                 </div>
               </div>
             )}
           </Modal>
+
         </>
       )}
     </div>
